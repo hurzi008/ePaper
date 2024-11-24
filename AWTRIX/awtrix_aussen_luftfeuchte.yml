@@ -1,0 +1,18 @@
+alias: Awtrix Aussen_Luftfeuchte
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - sensor.awtrix_f551b0_current_app
+    to: aussenluftfeuchte
+    trigger: state
+conditions: []
+actions:
+  - data:
+      qos: 0
+      retain: false
+      topic: awtrix_f551b0/custom/aussenluftfeuchte
+      payload: >-
+        { "text": "{{ states.sensor.zgb_draussen_sensor_humidity.state }}%",
+        "icon": "55419",  "color": "00FFFF"}
+    action: mqtt.publish

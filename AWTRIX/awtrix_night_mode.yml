@@ -1,0 +1,48 @@
+alias: 🌛 Awtrix Night Mode 🌛
+description: ""
+mode: single
+triggers:
+  - at: "23:59:59"
+    id: NM Start
+    enabled: true
+    trigger: time
+  - at: "06:00:00"
+    id: NM End
+    enabled: true
+    trigger: time
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - NM Start
+        sequence:
+          - data:
+              qos: 0
+              retain: false
+              topic: awtrix_f551b0/switch
+              payload: "{\"name\":\"Time\"}"
+            action: mqtt.publish
+          - data:
+              qos: 0
+              retain: false
+              topic: awtrix_f551b0/settings
+              payload: >-
+                { "WD": false, "TIME_COL": [255,0,0], "TMODE": 0, "BRI": 2,
+                "ATRANS": false }
+            action: mqtt.publish
+      - conditions:
+          - condition: trigger
+            id:
+              - NM End
+            enabled: true
+        sequence:
+          - data:
+              qos: 0
+              retain: false
+              topic: awtrix_f551b0/settings
+              payload: >-
+                { "WD": true, "TIME_COL": [255,255,255], "TMODE": 1, "BRI": 20,
+                "ATRANS": true }
+            action: mqtt.publish
