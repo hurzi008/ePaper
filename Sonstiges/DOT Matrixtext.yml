@@ -1,0 +1,15 @@
+alias: DOT MATRIX TEXT
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - input_text.text_to_display
+    trigger: state
+conditions: []
+actions:
+  - data:
+      qos: 0
+      retain: false
+      topic: cmnd/DVES_C05587_fb/DisplayText
+      payload: "{{states.input_text.text_to_display.state}}"
+    action: mqtt.publish
