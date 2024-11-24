@@ -1,0 +1,18 @@
+alias: HA-BACKUP(smaba)
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - schedule.ha_backup
+    from: "off"
+    to: "on"
+    trigger: state
+  - entity_id:
+      - input_button.ha_backup
+    trigger: state
+conditions: []
+actions:
+  - data:
+      addon: 15d21743_samba_backup
+      input: trigger
+    action: hassio.addon_stdin
