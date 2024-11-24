@@ -1,0 +1,1011 @@
+alias: ePaper Temperaturanzeige 7,2"
+description: Temperaturanzeige 7,2"
+mode: restart
+triggers:
+  - hours: /1
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "06:30:00"
+    before: "23:59:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.4467090C10116306
+    data:
+      background: white
+      rotate: 270
+      payload:
+        - type: text
+          value: Temperaturen
+          font: /media/Vacaciones.ttf
+          x: 10
+          "y": 5
+          size: 36
+          color: black
+        - type: text
+          value: Draußen Südseite
+          font: /media/GothamRnd-Bold.ttf
+          x: 10
+          "y": 45
+          size: 20
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 65
+          size: 25
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_draussen_sensor_temperature') | round(1)
+            }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 70
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_draussen_sensor_humidity') |round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 90
+          size: 18
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 85
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 199
+          y_start: 38
+          x_end: 199
+          y_end: 233
+        - type: text
+          value: Wohnzimmer
+          font: /media/GothamRnd-Bold.ttf
+          x: 205
+          "y": 45
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sonoff_temp_001_temperature') | round(1)
+            }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 70
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sonoff_temp_001_humidity') | round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 90
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 65
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 85
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 5
+          y_start: 109
+          x_end: 195
+          y_end: 109
+        - type: line
+          fill: black
+          width: 1
+          x_start: 203
+          y_start: 109
+          x_end: 395
+          y_end: 109
+        - type: text
+          value: Küche
+          font: /media/GothamRnd-Bold.ttf
+          x: 10
+          "y": 113
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_kue_aqara_temp002_temperature') |
+            round(1) }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 135
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_kue_aqara_temp002_humidity') | round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 155
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 130
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 150
+          size: 25
+          color: black
+        - type: text
+          value: Schlafzimmer
+          font: /media/GothamRnd-Bold.ttf
+          x: 205
+          "y": 113
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sz_aqara_temp001_temperature') |
+            round(1) }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 135
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sz_aqara_temp001_humidity') | round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 155
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 130
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 150
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 5
+          y_start: 173
+          x_end: 195
+          y_end: 173
+        - type: line
+          fill: black
+          width: 1
+          x_start: 203
+          y_start: 173
+          x_end: 395
+          y_end: 173
+        - type: text
+          value: 3. Zimmer
+          font: /media/GothamRnd-Bold.ttf
+          x: 205
+          "y": 181
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sonoff_temp_002_temperature') | round(1)
+            }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 203
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sonoff_temp_002_humidity') | round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 223
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 198
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 218
+          size: 25
+          color: black
+        - type: text
+          value: Flur
+          font: /media/GothamRnd-Bold.ttf
+          x: 10
+          "y": 181
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_fl_aqara_temp003_temperature') |
+            round(1) }} °C
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 203
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_fl_aqara_temp003_humidity') | round(1)
+            }}  %
+          font: /media/GothamRnd-Bold.ttf
+          x: 50
+          "y": 223
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 198
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 218
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 2
+          x_start: 5
+          y_start: 241
+          x_end: 395
+          y_end: 241
+        - type: text
+          value: "{{ 'Wetter' }}"
+          font: /media/Vacaciones.ttf
+          x: 10
+          "y": 250
+          size: 32
+          color: black
+        - type: text
+          value: "{{ 'Mondphase: ' }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 205
+          "y": 255
+          size: 20
+          color: black
+        - type: icon
+          value: |-
+            {% set cond_moon = states('sensor.moon_phase') %}  
+            {% if cond_moon == "new_moon" %}
+               moon-new
+            {% elif cond_moon == 'full_moon' %} 
+               moon-full
+            {% else %}
+               {{ "moon-" + cond_moon | replace("_", "-") }}
+            {% endif %}
+          x: 330
+          "y": 245
+          size: 35
+          color: black
+        - type: text
+          value: >-
+            {% set days = ["MO", "DI", "MI", "DO", "FR", "SA", "SO"]  %}   {{
+            days[now().weekday()] }}
+          font: /media/Vacaciones.ttf
+          x: 30
+          "y": 285
+          size: 20
+          color: black
+        - type: icon
+          value: |-
+            {% set wetter = states('sensor.baunatal_wetterzustand') | string %}
+            {% if wetter == 'clear-night' %}
+                weather-night
+            {% else %}
+                {{ "weather-" + wetter }}
+            {% endif %}
+          x: 18
+          "y": 310
+          size: 60
+          color: black
+        - type: text
+          value: "{{ states('sensor.baunatal_windrichtung') | string }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: >-
+            {% set WR = states('sensor.baunatal_windrichtung') | string %} {% if
+            WR == "N" or WR == "S" or WR == "W" or WR == "O" %}
+               14
+            {% else %}
+               10
+            {% endif %}
+          "y": 440
+          size: 16
+          color: black
+        - type: icon
+          value: >-
+            {% set Windrichtung = states('sensor.baunatal_windrichtung') |
+            string %}   {% if Windrichtung == "N" %}
+               arrow-down-thick 
+            {% elif Windrichtung == "NO" %}
+               arrow-bottom-left-thick         
+            {% elif Windrichtung == "O" %}
+               arrow-left-thick         
+            {% elif Windrichtung == "SO" %}
+               arrow-top-left-thick        
+            {% elif Windrichtung == "S" %}
+               arrow-up-thick
+            {% elif Windrichtung == "NW" %}
+               arrow-bottom-right-thick
+            {% elif Windrichtung == "W" %}
+               arrow-right-thick
+            {% elif Windrichtung == "SW" %}
+               arrow-top-right-thick
+            {% else %}
+               weather-dust
+            {% endif %}
+          x: 35
+          "y": 429
+          size: 34
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_windgeschwindigkeit","data")[0].value
+            | round }}
+          font: /media/GothamRnd-Bold.ttf
+          x: 67
+          "y": 440
+          size: 16
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.baunatal_niederschlagswahrscheinlichkeit","data")[0].value
+            | int(0) | round(0) }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 45
+          "y": 405
+          size: 20
+          color: black
+        - type: icon
+          value: weather-rainy
+          x: 10
+          "y": 400
+          size: 28
+          color: black
+        - type: icon
+          value: thermometer
+          x: 1
+          "y": 365
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_temperatur","data")[0].value | round
+            }}°C
+          font: /media/GothamRnd-Bold.ttf
+          x: 30
+          "y": 375
+          size: 22
+          color: black
+        - type: line
+          fill: black
+          width: 2
+          x_start: 10
+          y_start: 305
+          x_end: 374
+          y_end: 305
+        - type: icon
+          value: water-percent
+          x: 5
+          "y": 465
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_luftfeuchtigkeit","data")[0].value |
+            round }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 35
+          "y": 475
+          size: 22
+          color: black
+        - type: text
+          value: >-
+            {% set remaining_hours = 24 -
+            (as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[0].datetime) | timestamp_custom('%-H') | int) %} {{ "%s" %
+            (["SO","MO","DI","MI","DO","FR","SA"][as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[remaining_hours].datetime) | timestamp_custom('%w') | int])
+            }}
+          x: 122
+          "y": 285
+          size: 20
+          font: /media/Vacaciones.ttf
+          ancor: mt
+          color: black
+        - type: icon
+          value: >-
+            {% set Wetter =
+            state_attr("sensor.wetter_vorhersage_des_nachsten_tages","condition")
+            | string %}        {% if Wetter == "partlycloudy" %}
+                weather-partly-cloudy
+             {% elif Wetter == "cloudy" %}
+                weather-cloudy
+            {% elif Wetter == "sunny" %}
+                weather-sunny
+            {% elif Wetter == "clear-night" %}
+                weather-night
+            {% elif Wetter == "fog" %}
+                weather-fog
+            {% elif Wetter == "hail" %}
+                weather-hail
+            {% elif Wetter == "lightning" %}
+                weather-lightning
+            {% elif Wetter == "lightning-rainy" %}
+                weather-lightning-rainy
+            {% elif Wetter == "pouring" %}
+                weather-pouring
+            {% elif Wetter == "rainy" %}
+                weather-rainy
+            {% elif Wetter == "snowy" %}
+                weather-snowy
+            {% elif Wetter == "snowy-rainy" %}
+                weather-snowy-rainy
+            {% elif Wetter == "windy" %}
+                weather-windy
+            {% elif Wetter == "windy-variant" %}
+                weather-windy-variant
+            {% elif Wetter == "exceptional" %}
+                weather-tornado
+            {% else %}
+                weather-sunny-off
+            {% endif %}
+          x: 103
+          "y": 310
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_temperatur","data")[1].value | round
+            }}°C
+          font: /media/GothamRnd-Bold.ttf
+          x: 121
+          "y": 375
+          size: 22
+          color: black
+        - type: icon
+          value: thermometer
+          x: 92
+          "y": 365
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.wetter_vorhersage_des_nachsten_tages","wind_bearing")
+            | string }}
+          font: /media/GothamRnd-Bold.ttf
+          x: >-
+            {% set WR =
+            state_attr("sensor.wetter_vorhersage_des_nachsten_tages","wind_bearing")
+            | string %}   {% if WR == "N" or WR == "S" or WR == "W" or WR == "O"
+            %}
+               107
+            {% else %}
+               98
+            {% endif %}
+          "y": 440
+          size: 16
+          color: black
+        - type: icon
+          value: >-
+            {% set Windrichtung =
+            state_attr("sensor.wetter_vorhersage_des_nachsten_tages","wind_bearing")
+            | string %}     {% if Windrichtung == "N" %}
+               arrow-down-thick 
+            {% elif Windrichtung == "NO" %}
+               arrow-bottom-left-thick         
+            {% elif Windrichtung == "O" %}
+               arrow-left-thick         
+            {% elif Windrichtung == "SO" %}
+               arrow-top-left-thick        
+            {% elif Windrichtung == "S" %}
+               arrow-up-thick
+            {% elif Windrichtung == "NW" %}
+               arrow-bottom-right-thick
+            {% elif Windrichtung == "W" %}
+               arrow-right-thick
+            {% elif Windrichtung == "SW" %}
+               arrow-top-right-thick
+            {% else %}
+               weather-dust
+            {% endif %}
+          x: 123
+          "y": 429
+          size: 34
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.wetter_vorhersage_des_nachsten_tages","wind_speed")
+            | round }}
+          font: /media/GothamRnd-Bold.ttf
+          x: 157
+          "y": 440
+          size: 16
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.baunatal_niederschlagswahrscheinlichkeit","data")[1].value
+            | int(0) | round(0) }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 135
+          "y": 405
+          size: 20
+          color: black
+        - type: icon
+          value: weather-rainy
+          x: 100
+          "y": 400
+          size: 28
+          color: black
+        - type: line
+          fill: black
+          width: 2
+          x_start: 10
+          y_start: 305
+          x_end: 374
+          y_end: 305
+        - type: icon
+          value: water-percent
+          x: 95
+          "y": 465
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_luftfeuchtigkeit","data")[1].value |
+            round }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 120
+          "y": 475
+          size: 22
+          color: black
+        - type: line
+          fill: black
+          width: 2
+          x_start: 90
+          y_start: 285
+          x_end: 90
+          y_end: 490
+        - type: text
+          value: >-
+            {% set remaining_hours = 48 -
+            (as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[0].datetime) | timestamp_custom('%-H') | int) %} {{ "%s" %
+            (["SO","MO","DI","MI","DO","FR","SA"][as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[remaining_hours].datetime) | timestamp_custom('%w') | int])
+            }}
+          x: 210
+          "y": 285
+          size: 20
+          font: /media/Vacaciones.ttf
+          ancor: mt
+          color: black
+        - type: icon
+          value: >-
+            {% set Wetter = state_attr("sensor.wetter_uebermorgen","condition")
+            | string %}        {% if Wetter == "partlycloudy" %}
+                weather-partly-cloudy
+             {% elif Wetter == "cloudy" %}
+                weather-cloudy
+            {% elif Wetter == "sunny" %}
+                weather-sunny
+            {% elif Wetter == "clear-night" %}
+                weather-night
+            {% elif Wetter == "fog" %}
+                weather-fog
+            {% elif Wetter == "hail" %}
+                weather-hail
+            {% elif Wetter == "lightning" %}
+                weather-lightning
+            {% elif Wetter == "lightning-rainy" %}
+                weather-lightning-rainy
+            {% elif Wetter == "pouring" %}
+                weather-pouring
+            {% elif Wetter == "rainy" %}
+                weather-rainy
+            {% elif Wetter == "snowy" %}
+                weather-snowy
+            {% elif Wetter == "snowy-rainy" %}
+                weather-snowy-rainy
+            {% elif Wetter == "windy" %}
+                weather-windy
+            {% elif Wetter == "windy-variant" %}
+                weather-windy-variant
+            {% elif Wetter == "exceptional" %}
+                weather-tornado
+            {% else %}
+                weather-sunny-off
+            {% endif %}
+          x: 199
+          "y": 310
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_temperatur","data")[2].value | round
+            }}°C
+          font: /media/GothamRnd-Bold.ttf
+          x: 210
+          "y": 375
+          size: 22
+          color: black
+        - type: icon
+          value: thermometer
+          x: 180
+          "y": 365
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.baunatal_niederschlagswahrscheinlichkeit","data")[2].value
+            | int(0) | round(0) }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 223
+          "y": 405
+          size: 20
+          color: black
+        - type: icon
+          value: weather-rainy
+          x: 188
+          "y": 400
+          size: 28
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.wetter_uebermorgen","wind_bearing") | string
+            }}
+          font: /media/GothamRnd-Bold.ttf
+          x: >-
+            {% set WR = state_attr("sensor.wetter_uebermorgen","wind_bearing") |
+            string %}   {% if WR == "N" or WR == "S" or WR == "W" or WR == "O"
+            %}
+               192
+            {% else %}
+               188
+            {% endif %}
+          "y": 440
+          size: 16
+          color: black
+        - type: icon
+          value: >-
+            {% set Windrichtung =
+            state_attr("sensor.wetter_uebermorgen","wind_bearing") | string
+            %}     {% if Windrichtung == "N" %}
+               arrow-down-thick 
+            {% elif Windrichtung == "NO" %}
+               arrow-bottom-left-thick         
+            {% elif Windrichtung == "O" %}
+               arrow-left-thick         
+            {% elif Windrichtung == "SO" %}
+               arrow-top-left-thick        
+            {% elif Windrichtung == "S" %}
+               arrow-up-thick
+            {% elif Windrichtung == "NW" %}
+               arrow-bottom-right-thick
+            {% elif Windrichtung == "W" %}
+               arrow-right-thick
+            {% elif Windrichtung == "SW" %}
+               arrow-top-right-thick
+            {% else %}
+               weather-dust
+            {% endif %}
+          x: 210
+          "y": 429
+          size: 34
+          color: black
+        - type: text
+          value: "{{ state_attr(\"sensor.wetter_uebermorgen\",\"wind_speed\") | round }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 245
+          "y": 440
+          size: 16
+        - type: line
+          fill: black
+          width: 2
+          x_start: 180
+          y_start: 285
+          x_end: 180
+          y_end: 490
+        - type: icon
+          value: water-percent
+          x: 190
+          "y": 465
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_luftfeuchtigkeit","data")[2].value |
+            round }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 215
+          "y": 475
+          size: 22
+          color: black
+        - type: text
+          value: >-
+            {% set remaining_hours = 72 -
+            (as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[0].datetime) | timestamp_custom('%-H') | int) %} {{ "%s" %
+            (["SO","MO","DI","MI","DO","FR","SA"][as_timestamp(state_attr("sensor.baunatal_temperatur",
+            "data")[remaining_hours].datetime) | timestamp_custom('%w') | int])
+            }}
+          x: 299
+          "y": 285
+          size: 20
+          font: /media/Vacaciones.ttf
+          ancor: mt
+          color: black
+        - type: icon
+          value: >-
+            {% set Wetter = state_attr("sensor.wetter_in_3_tagen","condition") |
+            string %}        {% if Wetter == "partlycloudy" %}
+                weather-partly-cloudy
+             {% elif Wetter == "cloudy" %}
+                weather-cloudy               
+            {% elif Wetter == "sunny" %}
+                weather-sunny
+            {% elif Wetter == "clear-night" %}
+                weather-night
+            {% elif Wetter == "fog" %}
+                weather-fog
+            {% elif Wetter == "hail" %}
+                weather-hail
+            {% elif Wetter == "lightning" %}
+                weather-lightning
+            {% elif Wetter == "lightning-rainy" %}
+                weather-lightning-rainy
+            {% elif Wetter == "pouring" %}
+                weather-pouring
+            {% elif Wetter == "rainy" %}
+                weather-rainy
+            {% elif Wetter == "snowy" %}
+                weather-snowy
+            {% elif Wetter == "snowy-rainy" %}
+                weather-snowy-rainy
+            {% elif Wetter == "windy" %}
+                weather-windy
+            {% elif Wetter == "windy-variant" %}
+                weather-windy-variant
+            {% elif Wetter == "exceptional" %}
+                weather-tornado
+            {% else %}
+                weather-sunny-off
+            {% endif %}
+          x: 288
+          "y": 310
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_temperatur","data")[3].value | round
+            }}°C
+          font: /media/GothamRnd-Bold.ttf
+          x: 299
+          "y": 375
+          size: 22
+          color: black
+        - type: icon
+          value: thermometer
+          x: 269
+          "y": 365
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{
+            state_attr("sensor.baunatal_niederschlagswahrscheinlichkeit","data")[3].value
+            | int(0) | round(0) }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 309
+          "y": 405
+          size: 20
+          color: black
+        - type: icon
+          value: weather-rainy
+          x: 274
+          "y": 400
+          size: 28
+          color: black
+        - type: text
+          value: "{{ state_attr(\"sensor.wetter_in_3_tagen\",\"wind_bearing\") | string }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: >-
+            {% set WR = state_attr("sensor.wetter_in_3_tagen","wind_bearing") |
+            string %}   {% if WR == "N" or WR == "S" or WR == "W" or WR == "O"
+            %}
+               278
+            {% else %}
+               274
+            {% endif %}
+          "y": 440
+          size: 16
+          color: black
+        - type: icon
+          value: >-
+            {% set Windrichtung =
+            state_attr("sensor.wetter_in_3_tagen","wind_bearing") | string
+            %}     {% if Windrichtung == "N" %}
+               arrow-down-thick 
+            {% elif Windrichtung == "NO" %}
+               arrow-bottom-left-thick         
+            {% elif Windrichtung == "O" %}
+               arrow-left-thick         
+            {% elif Windrichtung == "SO" %}
+               arrow-top-left-thick        
+            {% elif Windrichtung == "S" %}
+               arrow-up-thick
+            {% elif Windrichtung == "NW" %}
+               arrow-bottom-right-thick
+            {% elif Windrichtung == "W" %}
+               arrow-right-thick
+            {% elif Windrichtung == "SW" %}
+               arrow-top-right-thick
+            {% else %}
+               weather-dust
+            {% endif %}
+          x: 300
+          "y": 429
+          size: 34
+          color: black
+        - type: text
+          value: "{{ state_attr(\"sensor.wetter_in_3_tagen\",\"wind_speed\") | round }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 334
+          "y": 440
+          size: 16
+        - type: line
+          fill: black
+          width: 2
+          x_start: 270
+          y_start: 285
+          x_end: 270
+          y_end: 490
+        - type: rectangle
+          x_start: 1
+          x_end: 383
+          y_start: 500
+          y_end: 578
+          width: 2
+          fill: null
+          outline: black
+        - type: icon
+          value: water-percent
+          x: 276
+          "y": 465
+          size: 30
+          color: black
+        - type: text
+          value: >-
+            {{ state_attr("sensor.baunatal_luftfeuchtigkeit","data")[3].value |
+            round }}%
+          font: /media/GothamRnd-Bold.ttf
+          x: 303
+          "y": 475
+          size: 22
+          color: black
+        - type: text
+          value: "{{ 'Sonnenaufgang:' }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 10
+          "y": 508
+          size: 18
+          color: black
+        - type: icon
+          value: weather-sunset-up
+          x: 10
+          "y": 520
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.sun_next_rising') | as_timestamp() |
+            timestamp_custom('%H:%M') }}
+          font: /media/GothamRnd-Bold.ttf
+          x: 75
+          "y": 540
+          size: 32
+          color: black
+        - type: text
+          value: "{{ 'Sonnenuntergang:' }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 202
+          "y": 508
+          size: 18
+          color: black
+        - type: icon
+          value: weather-sunset-down
+          x: 202
+          "y": 520
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.sun_next_setting') | as_timestamp() |
+            timestamp_custom('%H:%M') }}
+          font: /media/GothamRnd-Bold.ttf
+          x: 267
+          "y": 540
+          size: 32
+          color: black
+        - type: text
+          value: >-
+            {% set faktor = 0.0231 %} {% set wert =
+            states('sensor.zgb_fl_aqara_temp003_pressure') | float %} LUFTDRUCK:
+            {{ ((wert) + (wert * faktor)) | round(1) }} hPA
+          font: /media/GothamRnd-Bold.ttf
+          x: 60
+          "y": 588
+          size: 24
+          color: black
+        - type: icon
+          value: scale
+          x: 20
+          "y": 582
+          size: 30
+          color: black
+        - type: text
+          value: "Aktualisierung: {{ now().strftime('%d.%m.%Y - %H:%M') }} "
+          font: /media/GothamRnd-Bold.ttf
+          x: 20
+          y": 615
+          size: 18
+          color: black
+        - type: rectangle
+          x_start: 1
+          x_end: 383
+          y_start: 580
+          y_end: 639
+          width: 2
+          fill: null
+          outline: black
+    action: open_epaper_link.drawcustom

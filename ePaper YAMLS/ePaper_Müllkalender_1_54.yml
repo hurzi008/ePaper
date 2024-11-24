@@ -1,0 +1,176 @@
+alias: ePaper_Müllkalender_1_54
+description: Müllkalender Mini 1.54
+triggers:
+  - hours: /6
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "06:00:00"
+    before: "20:00:00"
+    weekday:
+      - sat
+      - fri
+      - thu
+      - wed
+      - tue
+      - mon
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.000002A95FF53417
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: text
+          value: MÜLLKALENDER
+          font: /media/GothamRnd-Bold.ttf
+          x: 20
+          "y": 2
+          size: 14
+          color: red
+        - type: text
+          value: Müll
+          font: /media/GothamRnd-Bold.ttf
+          x: 25
+          "y": 20
+          size: 13
+        - type: text
+          value: "{{ states('sensor.restabfallbehalter') }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 15
+          "y": 70
+          size: 13
+        - type: icon
+          value: >
+            {% set restabfall_wert = states('sensor.restabfallbehalter') |
+            string %}    {% if  restabfall_wert == '1 Tage' %}
+              delete-alert-outline
+            {% elif restabfall_wert == '2 Tage' %}
+              delete-clock-outline
+            {% elif restabfall_wert == '3 Tage' %}
+              delete-empty-outline
+            {% elif restabfall_wert == '4 Tage' %}
+              delete-variant
+            {% elif restabfall_wert == '5 Tage' %}
+              delete-outline
+            {% else %}
+               delete-sweep-outline
+            {% endif %}                  
+          x: 20
+          "y": 30
+          size: 40
+          color: black
+        - type: text
+          value: Papier
+          font: /media/GothamRnd-Bold.ttf
+          x: 90
+          "y": 20
+          size: 13
+        - type: text
+          value: "{{ states('sensor.papierbehalter') }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 90
+          "y": 70
+          size: 13
+        - type: icon
+          value: >
+            {% set papiertonne_wert = states('sensor.papierbehalter') | string
+            %} {% if papiertonne_wert == '1 Tage' %}
+              delete-alert-outline
+            {% elif papiertonne_wert == '2 Tage' %}
+              delete-clock-outline
+            {% elif papiertonne_wert == '3 Tage' %}
+              delete-empty-outline
+            {% elif papiertonne_wert == '4 Tage' %}
+              delete-variant
+            {% elif papiertonne_wert == '5 Tage' %}
+              delete-outline
+            {% else %}
+               delete-sweep-outline
+            {% endif %}                  
+          x: 95
+          "y": 30
+          size: 40
+          color: black
+        - type: text
+          value: Bio Tonne
+          font: /media/GothamRnd-Bold.ttf
+          x: 7
+          "y": 85
+          size: 13
+        - type: text
+          value: "{{ states('sensor.biotonne') }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 15
+          "y": 140
+          size: 13
+        - type: icon
+          value: >
+            {% set bioabfall_wert = states('sensor.biotonne') | string %} {% if
+            bioabfall_wert == '1 Tage' %}
+              delete-alert-outline
+            {% elif bioabfall_wert == '2 Tage' %}
+              delete-clock-outline
+            {% elif bioabfall_wert == '3 Tage' %}
+              delete-empty-outline
+            {% elif bioabfall_wert == '4 Tage' %}
+              delete-variant
+            {% elif bioabfall_wert == '5 Tage' %}
+              delete-outline
+            {% else %}
+               delete-sweep-outline
+            {% endif %}                  
+          x: 20
+          "y": 97
+          size: 40
+          color: black
+        - type: text
+          value: Grün.Pkt.
+          font: /media/GothamRnd-Bold.ttf
+          x: 86
+          "y": 85
+          size: 13
+        - type: text
+          value: "{{ states('sensor.gelbe_tonne') }}"
+          font: /media/GothamRnd-Bold.ttf
+          x: 90
+          "y": 140
+          size: 13
+        - type: icon
+          value: >
+            {% set papierabfall_wert = states('sensor.gelbe_tonne') | string %}
+            {% if papierabfall_wert == '1 Tage' %}
+              delete-alert-outline
+            {% elif papierabfall_wert == '2 Tage' %}
+              delete-clock-outline
+            {% elif papierabfall_wert == '3 Tage' %}
+              delete-empty-outline
+            {% elif papierabfall_wert == '4 Tage' %}
+              delete-variant
+            {% elif papierabfall_wert == '5 Tage' %}
+              delete-outline
+            {% else %}
+               delete-sweep-outline
+            {% endif %}                  
+          x: 95
+          "y": 97
+          size: 40
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 76
+          y_start: 16
+          x_end: 76
+          y_end: 152
+        - type: line
+          fill: black
+          width: 1
+          x_start: 1
+          y_start: 82
+          x_end: 152
+          y_end: 82
+    action: open_epaper_link.drawcustom
+mode: single

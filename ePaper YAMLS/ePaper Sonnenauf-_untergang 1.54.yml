@@ -1,0 +1,88 @@
+description: ePaper Sonnenauf-/untergang 1.54
+mode: single
+triggers:
+  - hours: /4
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "03:00:00"
+    before: "23:00:00"
+    weekday:
+      - sat
+      - fri
+      - thu
+      - wed
+      - tue
+      - mon
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.000002A95F64341F
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: text
+          value: "{{ 'Sonne: ' }}"
+          font: ppb.ttf
+          x: 2
+          "y": 2
+          size: 18
+          color: red
+        - type: text
+          value: " {{ now().strftime('%d.%m.%Y') }} "
+          font: ppb.ttf
+          x: 70
+          "y": 2
+          size: 14
+          color: red
+          ancor: lt
+        - type: rectangle
+          x_start: 1
+          x_end: 151
+          y_start: 16
+          y_end: 151
+          width: 2
+          fill: null
+          outline: black
+        - type: rectangle
+          x_start: 1
+          x_end: 151
+          y_start: 82
+          y_end: 151
+          width: 2
+          fill: null
+          outline: black
+        - type: icon
+          value: weather-sunset-up
+          x: 5
+          "y": 20
+          size: 60
+          color: black
+        - type: icon
+          value: weather-sunset-down
+          x: 5
+          "y": 87
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.sun_next_rising') | as_timestamp() |
+            timestamp_custom('%H:%M') }}
+          font: ppb.ttf
+          x: 65
+          "y": 40
+          size: 30
+          color: red
+        - type: text
+          value: >-
+            {{ states('sensor.sun_next_setting') | as_timestamp() |
+            timestamp_custom('%H:%M') }}
+          font: ppb.ttf
+          x: 65
+          "y": 108
+          size: 30
+          color: red
+          ancor: mt
+    action: open_epaper_link.drawcustom

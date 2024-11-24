@@ -1,0 +1,36 @@
+alias: USB Schalter EIN/AUS - TEST
+description: Switch on / off
+mode: single
+triggers:
+  - at: "21:00:00"
+    id: time_on
+    trigger: time
+  - at: "07:00:00"
+    id: time_off
+    trigger: time
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: time_on
+          - condition: state
+            entity_id: switch.usb_schalter_02
+            state: "off"
+        sequence:
+          - target:
+              entity_id: switch.usb_schalter_02
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: trigger
+            id: time_off
+          - condition: state
+            entity_id: switch.usb_schalter_02
+            state: "on"
+        sequence:
+          - target:
+              entity_id: switch.usb_schalter_02
+            action: switch.turn_off
+            data: {}
+    default: []

@@ -1,0 +1,372 @@
+alias: ePaper Temperaturanzeige 4.2
+description: Temperatureanzeige
+mode: restart
+triggers:
+  - hours: /1
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "06:30:00"
+    before: "23:59:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.0000018E55F1411D
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: text
+          value: Temperaturanzeige wolfonso
+          font: ppb.ttf
+          x: 15
+          "y": 10
+          size: 24
+          color: red
+        - type: line
+          fill: red
+          width: 3
+          x_start: 0
+          y_start: 33
+          x_end: 400
+          y_end: 33
+        - type: text
+          value: Draußensensor 01
+          font: ppb.ttf
+          x: 10
+          "y": 40
+          size: 20
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 60
+          size: 25
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_draussen_sensor_temperature') | round(1)
+            }} °C
+          font: ppb.ttf
+          x: 50
+          "y": 65
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_draussen_sensor_humidity') |round(1)
+            }}  %
+          font: ppb.ttf
+          x: 50
+          "y": 85
+          size: 18
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 80
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 199
+          y_start: 38
+          x_end: 199
+          y_end: 233
+        - type: text
+          value: Wohnzimmer
+          font: ppb.ttf
+          x: 205
+          "y": 40
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sonoff_temp_001_temperature') | round(1)
+            }} °C
+          font: ppb.ttf
+          x: 245
+          "y": 65
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sonoff_temp_001_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 245
+          "y": 85
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 60
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 80
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 5
+          y_start: 103
+          x_end: 195
+          y_end: 103
+        - type: line
+          fill: black
+          width: 1
+          x_start: 203
+          y_start: 103
+          x_end: 395
+          y_end: 103
+        - type: text
+          value: Küche
+          font: ppb.ttf
+          x: 10
+          "y": 108
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_kue_aqara_temp002_temperature') |
+            round(1) }} °C
+          font: ppb.ttf
+          x: 50
+          "y": 130
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_kue_aqara_temp002_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 50
+          "y": 150
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 125
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 145
+          size: 25
+          color: black
+        - type: text
+          value: Schlafzimmer
+          font: ppb.ttf
+          x: 205
+          "y": 108
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sz_aqara_temp001_temperature') |
+            round(1) }} °C
+          font: ppb.ttf
+          x: 245
+          "y": 130
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sz_aqara_temp001_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 245
+          "y": 150
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 125
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 145
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 5
+          y_start: 168
+          x_end: 195
+          y_end: 168
+        - type: line
+          fill: black
+          width: 1
+          x_start: 203
+          y_start: 168
+          x_end: 395
+          y_end: 168
+        - type: text
+          value: Küche
+          font: ppb.ttf
+          x: 10
+          "y": 108
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_kue_aqara_temp002_temperature') |
+            round(1) }} °C
+          font: ppb.ttf
+          x: 50
+          "y": 130
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_kue_aqara_temp002_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 50
+          "y": 150
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 125
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 145
+          size: 25
+          color: black
+        - type: text
+          value: 3. Zimmer
+          font: ppb.ttf
+          x: 205
+          "y": 176
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_sonoff_temp_002_temperature') | round(1)
+            }} °C
+          font: ppb.ttf
+          x: 245
+          "y": 198
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_sonoff_temp_002_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 245
+          "y": 218
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 205
+          "y": 193
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 205
+          "y": 213
+          size: 25
+          color: black
+        - type: text
+          value: Flur
+          font: ppb.ttf
+          x: 10
+          "y": 176
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            TEMP: {{ states('sensor.zgb_fl_aqara_temp003_temperature') |
+            round(1) }} °C
+          font: ppb.ttf
+          x: 50
+          "y": 198
+          size: 18
+          color: black
+        - type: text
+          value: >-
+            HUM:   {{ states('sensor.zgb_fl_aqara_temp003_humidity') | round(1)
+            }}  %
+          font: ppb.ttf
+          x: 50
+          "y": 218
+          size: 18
+          color: black
+        - type: icon
+          value: home-thermometer-outline
+          x: 10
+          "y": 193
+          size: 25
+          color: black
+        - type: icon
+          value: water-outline
+          x: 10
+          "y": 213
+          size: 25
+          color: black
+        - type: line
+          fill: black
+          width: 1
+          x_start: 5
+          y_start: 236
+          x_end: 195
+          y_end: 236
+        - type: line
+          fill: black
+          width: 1
+          x_start: 203
+          y_start: 236
+          x_end: 395
+          y_end: 236
+        - type: text
+          value: >-
+            {% set faktor = 0.0231 %} {% set wert =
+            states('sensor.zgb_fl_aqara_temp003_pressure') | float %} LUFTDRUCK:
+            {{ ((wert) + (wert * faktor)) | round(1) }} hPA
+          font: ppb.ttf
+          x: 70
+          "y": 250
+          size: 24
+          color: black
+        - type: icon
+          value: scale
+          x: 30
+          "y": 242
+          size: 30
+          color: red
+        - type: text
+          value: "Letzte Aktualisierung: {{ now().strftime('%d.%m.%Y - %H:%M') }} "
+          font: ppb.ttf
+          x: 8
+          y": 275
+          size: 18
+          color: black
+    action: open_epaper_link.drawcustom

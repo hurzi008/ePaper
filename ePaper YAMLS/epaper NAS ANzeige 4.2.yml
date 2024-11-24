@@ -1,0 +1,387 @@
+alias: epaper NAS ANzeige 4.2
+description: Synologie NAS Anzeige
+triggers:
+  - hours: /1
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "06:30:00"
+    before: "23:59:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.0000018E58B04115
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: icon
+          value: nas
+          x: 8
+          "y": 10
+          size: 45
+          color: black
+        - type: text
+          value: "NAS Status:"
+          font: ppb.ttf
+          x: 60
+          "y": 20
+          size: 20
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_volume_1_status') | string }}"
+          font: ppb.ttf
+          x: 240
+          "y": 20
+          size: 20
+          color: red
+        - type: text
+          value: "Updatestatus: "
+          font: ppb.ttf
+          x: 60
+          "y": 40
+          size: 20
+          color: black
+        - type: text
+          value: "{{ states('update.peternas02_dsm_update') }}"
+          font: ppb.ttf
+          x: 240
+          "y": 40
+          size: 20
+          color: red
+        - type: text
+          value: "Letzter Neustart: "
+          font: ppb.ttf
+          x: 60
+          "y": 60
+          size: 20
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.peternas02_letzter_start') | as_timestamp() |
+            timestamp_custom('%d.%m.%Y') }}
+          font: ppb.ttf
+          x: 240
+          "y": 60
+          size: 20
+          color: red
+        - type: line
+          fill: black
+          width: 2
+          x_start: 2
+          y_start: 80
+          x_end: 398
+          y_end: 80
+        - type: rectangle
+          x_start: 2
+          x_end: 120
+          y_start: 80
+          y_end: 256
+          width: 2
+          fill: white
+          outline: black
+        - type: icon
+          value: memory
+          x: 8
+          "y": 85
+          size: 40
+          color: black
+        - type: text
+          value: RAM
+          font: ppb.ttf
+          x: 45
+          "y": 98
+          size: 20
+          color: black
+        - type: text
+          value: "Gesamt: "
+          font: ppb.ttf
+          x: 10
+          "y": 135
+          size: 16
+          color: black
+          anchor: lm
+        - type: text
+          value: >-
+            {{ states('sensor.peternas02_speicher_gesamt_real', with_unit=True)
+            | string }}
+          font: ppb.ttf
+          x: 10
+          "y": 155
+          size: 16
+          color: red
+          anchor: lm
+        - type: text
+          value: "Frei: "
+          font: ppb.ttf
+          x: 10
+          "y": 180
+          size: 16
+          color: black
+          anchor: lm
+        - type: text
+          value: >-
+            {{ states('sensor.peternas02_speicher_verfugbar_real',
+            with_unit=True) | string }}
+          font: ppb.ttf
+          x: 20
+          "y": 195
+          size: 16
+          color: red
+          anchor: lm
+        - type: text
+          value: "In Nutzung: "
+          font: ppb.ttf
+          x: 10
+          "y": 220
+          size: 16
+          color: black
+          anchor: lm
+        - type: text
+          value: "{{ states('sensor.peternas02_speichernutzung_real') | string }} %"
+          font: ppb.ttf
+          x: 30
+          "y": 235
+          size: 16
+          color: red
+          anchor: lm
+        - type: rectangle
+          x_start: 120
+          x_end: 240
+          y_start: 80
+          y_end: 256
+          width: 2
+          fill: white
+          outline: black
+        - type: text
+          value: SYSTEM
+          font: ppb.ttf
+          x: 130
+          "y": 105
+          size: 20
+          color: black
+          anchor: lm
+        - type: text
+          value: "CPU:"
+          x: 130
+          "y": 130
+          size: 16
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_cpu_auslastung_gesamt') | string }}%"
+          font: ppb.ttf
+          x: 195
+          "y": 130
+          size: 16
+          color: red
+        - type: text
+          value: "TEMP:"
+          x: 130
+          "y": 150
+          size: 16
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.peternas02_temperatur', with_unit=True) | string
+            }}
+          font: ppb.ttf
+          x: 190
+          "y": 150
+          size: 16
+          color: red
+        - type: text
+          value: Sicherheits-
+          x: 130
+          "y": 170
+          size: 16
+          color: black
+        - type: text
+          value: "status:"
+          x: 130
+          "y": 185
+          size: 16
+          color: black
+        - type: icon
+          value: >-
+            {{ 'alert' if is_state('binary_sensor.peternas02_sicherheitsstatus',
+            'on') else 'check-circle-outline' }}
+          x: 160
+          "y": 200
+          size: 40
+          color: >-
+            {{ 'red' if is_state('binary_sensor.peternas02_sicherheitsstatus',
+            'on') else 'black' }}
+        - type: line
+          fill: black
+          width: 2
+          x_start: 2
+          y_start: 255
+          x_end: 398
+          y_end: 255
+        - type: icon
+          value: harddisk
+          x: 240
+          "y": 85
+          size: 40
+          color: black
+        - type: text
+          value: Laufwerke
+          font: ppb.ttf
+          x: 280
+          "y": 86
+          size: 20
+          color: black
+        - type: text
+          value: Disks
+          font: ppb.ttf
+          x: 280
+          "y": 107
+          size: 20
+          color: black
+        - type: text
+          value: 4 X 4TB N300
+          font: ppb.ttf
+          x: 250
+          "y": 128
+          size: 16
+          color: black
+        - type: text
+          value: "Belegt:"
+          font: ppb.ttf
+          x: 250
+          "y": 148
+          size: 16
+          color: black
+        - type: text
+          value: >-
+            {{ states('sensor.peternas02_volume_1_belegter_speicherplatz',
+            with_unit=True) | string }}
+          font: ppb.ttf
+          x: 320
+          "y": 148
+          size: 16
+          color: red
+        - type: text
+          value: "Temp:"
+          font: ppb.ttf
+          x: 250
+          "y": 168
+          size: 16
+          color: black
+        - type: text
+          value: >-
+            {{
+            states('sensor.peternas02_volume_1_durchschnittliche_festplattentemperatur')
+            | string }} °C
+          font: ppb.ttf
+          x: 320
+          "y": 168
+          size: 16
+          color: red
+        - type: text
+          value: "Drv1:"
+          font: ppb.ttf
+          x: 250
+          "y": 190
+          size: 16
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_drive_1_status') | string }}"
+          font: ppb.ttf
+          x: 320
+          "y": 190
+          size: 16
+          color: red
+        - type: text
+          value: "Drv2:"
+          font: ppb.ttf
+          x: 250
+          "y": 206
+          size: 16
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_drive_2_status') | string }}"
+          font: ppb.ttf
+          x: 320
+          "y": 206
+          size: 16
+          color: red
+        - type: text
+          value: "Drv3:"
+          font: ppb.ttf
+          x: 250
+          "y": 224
+          size: 16
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_drive_3_status') | string }}"
+          font: ppb.ttf
+          x: 320
+          "y": 224
+          size: 16
+          color: red
+        - type: text
+          value: "Drv4:"
+          font: ppb.ttf
+          x: 250
+          "y": 242
+          size: 16
+          color: black
+        - type: text
+          value: "{{ states('sensor.peternas02_drive_4_status') | string }}"
+          font: ppb.ttf
+          x: 320
+          "y": 242
+          size: 16
+          color: red
+        - type: icon
+          value: calendar-clock
+          x: 8
+          "y": 260
+          size: 40
+          color: black
+        - type: text
+          value: "Letzte Aktualisierung:"
+          font: ppb.ttf
+          x: 55
+          "y": 260
+          size: 18
+          color: black
+        - type: text
+          value: "{{ now().strftime('%d.%m.%Y - %H:%M') }} "
+          font: ppb.ttf
+          x: 75
+          "y": 280
+          size: 18
+          color: red
+        - type: line
+          fill: black
+          width: 2
+          x_start: 260
+          y_start: 256
+          x_end: 260
+          y_end: 298
+        - type: text
+          value: "NAS initialisiert:"
+          font: ppb.ttf
+          x: 270
+          "y": 265
+          size: 14
+          color: black
+        - type: text
+          value: 09.09.2024
+          font: ppb.ttf
+          x: 280
+          "y": 280
+          size: 14
+          color: black
+    action: open_epaper_link.drawcustom
+mode: restart

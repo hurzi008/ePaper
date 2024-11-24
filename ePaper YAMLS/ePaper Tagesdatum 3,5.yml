@@ -1,0 +1,56 @@
+alias: ePaper Tagesdatum 3,5 Zoll Display
+description: Datumsanzeige
+mode: restart
+triggers:
+  - hours: /6
+    trigger: time_pattern
+conditions:
+  - condition: time
+    after: "00:01:00"
+    before: "23:59:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+actions:
+  - target:
+      entity_id:
+        - open_epaper_link.7801055621819701
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: text
+          value: >-
+            {% set days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag",
+            "Freitag", "Samstag", "Sonntag"]  %} {{ days[now().weekday()] }}
+          font: /media/GothamRnd-Bold.ttf
+          anchor: mt
+          x: 192
+          "y": 5
+          size: 60
+          color: black
+        - type: text
+          value: >-
+            {% set months = ["Januar", "Februar", "März", "April", "Mai",
+            "Juni", "Juli", "August", "September", "Oktober", "November",
+            "Dezember"] %} {{ now().day }}{{". "}}{{ months[now().month-1] }}
+          font: /media/GothamRnd-Bold.ttf
+          anchor: mt
+          x: 192
+          "y": 70
+          size: 50
+          color: red
+        - type: text
+          value: "{{ now().year }}"
+          font: /media/GothamRnd-Bold.ttf
+          anchor: mt
+          x: 192
+          "y": 130
+          size: 58
+          color: black
+    action: open_epaper_link.drawcustom
