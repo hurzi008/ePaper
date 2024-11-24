@@ -1,0 +1,18 @@
+alias: Awtrix Luftdruck
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - sensor.awtrix_f551b0_current_app
+    to: Luftdruck
+    trigger: state
+conditions: []
+actions:
+  - data:
+      qos: 0
+      retain: false
+      topic: awtrix_f551b0/custom/Luftdruck
+      payload: >-
+        { "text": "{{ states.sensor.zgb_fl_aqara_temp003_pressure.state }}",
+        "icon": "60347", "color": "FF4500"}
+    action: mqtt.publish

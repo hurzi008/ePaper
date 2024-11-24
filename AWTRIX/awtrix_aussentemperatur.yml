@@ -1,0 +1,18 @@
+alias: Awtrix Aussentemperatur
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - sensor.awtrix_f551b0_current_app
+    to: aussentemperatur
+    trigger: state
+conditions: []
+actions:
+  - data:
+      qos: 0
+      retain: false
+      topic: awtrix_f551b0/custom/aussentemperatur
+      payload: >-
+        { "text": "{{ states.sensor.zgb_draussen_sensor_temperature.state }}°",
+        "icon": "40735",  "color": "00FF00"}
+    action: mqtt.publish
