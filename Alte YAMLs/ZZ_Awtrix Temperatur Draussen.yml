@@ -1,0 +1,36 @@
+alias: Awtrix Temperatur Draussen
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - sensor.zgb_draussen_sensor_temperature
+    trigger: state
+conditions:
+  - condition: time
+    after: "06:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+    before: "23:59:59"
+actions:
+  - data:
+      qos: "0"
+      retain: false
+      topic: awtrix_f551b0/notify
+      payload: >-
+        {           "text": "{{
+        states.sensor.zgb_draussen_sensor_temperature.state }}",  "textCase": 
+        2, "duration": 20,
+         "icon": {% if (states.sensor.zgb_draussen_sensor_temperature.state | int >= 10) %} "40735"
+                  {% else %}"19127"
+                  {% endif %},
+          "color":  {% if (states.sensor.zgb_draussen_sensor_temperature.state | int >= 10) %} "#00FF00"
+                    {% else %} "#00EEEE"
+                    {% endif %}
+        }
+    action: mqtt.publish

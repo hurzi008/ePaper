@@ -1,0 +1,21 @@
+alias: ZZ_DWD Vorhersage
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - weather.baunatal
+    to: Vorhersage
+    attribute: temperature
+    trigger: state
+conditions: []
+actions:
+  - data:
+      qos: 0
+      retain: false
+      topic: awtrix_f551b0/custom/vorhersage
+      payload: >-
+        { "text": "{{ state_attr('weather.baunatal','temperature') }} {{ "°"
+        }}", 
+
+         "color": "#ffffff"}
+    action: mqtt.publish

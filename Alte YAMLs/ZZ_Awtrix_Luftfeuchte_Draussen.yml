@@ -1,0 +1,37 @@
+alias: Awtrix Luftfeuchte Draussen
+description: ""
+mode: single
+triggers:
+  - entity_id:
+      - sensor.zgb_draussen_sensor_humidity
+    enabled: true
+    trigger: state
+conditions:
+  - condition: time
+    after: "06:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+    before: "23:59:59"
+actions:
+  - data:
+      qos: "0"
+      retain: false
+      topic: awtrix_f551b0/notify
+      payload: >-
+        {           "text": "{{
+        states.sensor.zgb_draussen_sensor_humidity.state}}%",  "textCase":  2,
+        "duration": 20,
+         "icon": {% if (states.sensor.zgb_draussen_sensor_humidity.state | int > 0) %} "55419"
+                  {% else %}"55419"
+                  {% endif %},
+          "color":  {% if (states.sensor.zgb_draussen_sensor_humidity.state | int > 0) %} "#00FFFF"
+                    {% else %} "#00FFFF"
+                    {% endif %}
+        }
+    action: mqtt.publish
